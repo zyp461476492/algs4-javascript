@@ -40,5 +40,52 @@ function shellSort(array) {
                 exchange(a, j, j - h);
         }
     }
+}
 
+/**
+ * 归并排序，归并方法
+ * 将 [lo...mid] 和 [mid+1...hi] 进行归并
+ * @param {Array} array 
+ * @param {Number} lo 
+ * @param {Number} mid
+ * @param {Number} hi 
+ */
+function merge(array, lo, mid,  hi) {
+    let tempArray = [];
+    let i = lo;
+    let j = mid + 1;
+
+    // 复制数组
+    for (let k = lo; k <= hi; k++) {
+        tempArray.push(array[k]);
+    }
+    // 合并
+    for (let k = lo; k <= hi; k++) {
+        if (i > mid) 
+            tempArray[k] = array[j++];
+        else if (j > hi) {
+            tempArray[k] = array[i++];
+        } else if (array[i] < array[j]) 
+            tempArray[k] = array[i++];
+        else 
+            tempArray[k] = array[k++];
+    }
+}
+
+/**
+ * 归并排序
+ * @param {Array} array 
+ * @param {Number} lo
+ * @param {Number} hi
+ */
+function mergeSort(array, lo, hi) {
+    if (hi <= lo)
+        return;
+    let mid = lo + (hi - lo) / 2;
+    // 排序左边
+    mergeSort(array, lo, mid);
+    // 排序右边
+    mergeSort(array, mid + 1, hi);
+    // 合并
+    merge(array, lo, mid, hi);
 }
