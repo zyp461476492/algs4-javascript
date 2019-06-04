@@ -89,3 +89,26 @@ function mergeSort(array, lo, hi) {
     // 合并
     merge(array, lo, mid, hi);
 }
+
+
+/**
+ * 快速排序，找寻中位数 j 的方法
+ * @param {Array} array 
+ * @param {Number} lo 
+ * @param {Number} hi 
+ */
+function partition(array, lo, hi) {
+    let i = lo;
+    let j = hi + 1;
+    let v = array[lo];
+
+    while (true) {
+        while (array[i++] > v) if (i == j) break;
+        while (array[j--] < v) if (i == j) break;
+        if (i >= j) 
+            break;
+        exchange(array, i, j); 
+    }
+
+    return j;
+}
