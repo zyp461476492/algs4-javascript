@@ -35,11 +35,15 @@ function shellSort(array) {
     let len = array.length;
     let h = 1;
     while (h < len / 3) h = 3 * h + 1;
-    for (let i = h; i < len; i++) {
-        for (let j = i; j >= h && array[j] < array[j - h]; j -= h ) {
-                exchange(a, j, j - h);
+    while (h > 1) {
+        for (let i = h; i < len; i++) {
+            for (let j = i; j >= h && array[j] < array[j - h]; j -= h ) {
+                    exchange(a, j, j - h);
+            }
         }
+        h = h / 3;
     }
+    
 }
 
 /**
@@ -111,4 +115,20 @@ function partition(array, lo, hi) {
     }
 
     return j;
+}
+
+/**
+ * 快速排序
+ * @param {Array} array 
+ * @param {Number} lo 
+ * @param {Number} hi 
+ */
+function quickSort(array, lo, hi) {
+    if (lo > hi) {
+        return;
+    }
+
+    let j = partition(array, lo, hi);
+    quickSort(array, lo, j - 1);
+    quickSort(array, j + 1, hi);
 }
